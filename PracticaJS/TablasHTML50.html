@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tabla Estructurada</title>
+    <style>
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            text-align: center;
+        }
+        .table-no-border td {
+            border: none;
+        }
+        .col-small {
+            width: 25%;
+        }
+        .col-medium {
+            width: 50%;
+        }
+        .col-large {
+            width: 60%;
+        }
+        .title {
+            font-weight: bold;
+            font-size: 24px;
+        }
+        th, td {
+            border: 1px solid black;
+            padding: 0px;
+        }
+    </style>
+</head>
+<body style="font-family: Verdana"> <center>
+    <table class="table-no-border">
+        <tr>
+            <td class="col-small"><img src="imagen1.jpg" alt="Imagen 1" width="100%"></td>
+            <td class="col-medium">
+                <p class="title">INSTITUTO POLITÉCNICO NACIONAL</p>
+                <p>ESCUELA SUPERIOR DE CÓMPUTO
+                <br>SUBDIRECCIÓN DE SERVICIOS EDUCATIVOS E INTEGRACIÓN SOCIAL
+                <br>DEPARTAMENTO DE EXTENSIÓN Y APOYOS EDUCATIVOS</p>
+                <b>Jornada de Inducción para los estudiantes de nuevo ingreso, agosto 2024
+                <br>Sede: Auditoria de la ESCOM<b>
+            </td>
+            <td class="col-small"><img src="imagen2.jpg" alt="Imagen 2" width="100%"></td>
+        </tr>
+    </table><br><br>
+    
+    <table style="width: 90%">
+        <tr>
+            <th style="width: 70%">
+                <p style="font-size:20px;">Día/Actividades</p>
+            </th>
+            <th style="width: 15%">
+                <p style="font-size:20px;">Por primera letra del primer apellido</p>
+            </th>
+            <th style="width: 15%">
+                <p style="font-size:20px;">Horario</p>
+            </th>
+        </tr>
+
+        <tr >
+            <td rowspan="2" style="text-align: left;"><p>
+                <strong>Martes 20 de agosto de 2024</strong>
+                <br>1.-Bienvenida por parte de las autoridades
+                <br>2.-Identidad Politécnica
+                <br>3.-Normatividad IPN
+            </p></td>
+            <td>A a L</td>
+            <td>10:00 a 11:30 horas</td>
+        </tr>
+        <tr>
+            <td>M a Z</td>
+            <td>12:00 a 13:30 horas</td>
+        </tr>
+
+        <tr >
+            <td rowspan="2" style="text-align: left;"><p>
+                <strong>Miércoles 21 de agosto de 2024</strong>
+                <br>1.-Presentación de la Red de Género de la ESCOM
+                <br>2.-Presentación del Departamento de Servicios Estudiantiles
+            </p></td>
+            <td>A a L</td>
+            <td>10:00 a 11:30 horas</td>
+        </tr>
+        <tr>
+            <td>M a Z</td>
+            <td>12:00 a 13:30 horas</td>
+        </tr>
+
+        <tr >
+            <td rowspan="2" style="text-align: left;"><p>
+                <strong>Jueves 22 de agosto de 2024</strong>
+                <br>1.-Perfil de igreso y egreso de los programas académicos
+                <br>2.-Presentación de jefes de la Subdirección Académica
+            </p></td>
+            <td>A a L</td>
+            <td>10:00 a 11:30 horas</td>
+        </tr>
+        <tr>
+            <td>M a Z</td>
+            <td>12:00 a 13:30 horas</td>
+        </tr>
+
+        <tr >
+            <td rowspan="2" style="text-align: left;"><p>
+                <strong>Viernes 23 de agosto de 2024</strong>
+                <br>1.-Presentación de la Subdirección de Servicios Educativos de Integración Social
+                <br>2.-Gestión Escolar, movilidad, becas, servicio social y bolsa de trabajo
+                <br>3.-Plática de la Comisión de Operación y Fomento de Actividades Académicas (COFAA)
+            </p></td>
+            <td>A a L</td>
+            <td>10:00 a 11:30 horas</td>
+        </tr>
+        <tr>
+            <td>M a Z</td>
+            <td>12:00 a 13:30 horas</td>
+        </tr>
+
+        <tr >
+            <td rowspan="2" style="text-align: left;"><p>
+                <strong>Sábado 24 de agosto de 2024</strong>
+                <br>1.-Plática con <strong>padres y madres</strong> de estudiantes de nuevo ingreso
+                <br>2.-Donativos
+            </p></td>
+            <td>A a L</td>
+            <td>9:00 a 10:30 horas</td>
+        </tr>
+        <tr>
+            <td>M a Z</td>
+            <td>11:30 a 13:00 horas</td>
+        </tr>
+    </table></center>
+</body>
+</html>

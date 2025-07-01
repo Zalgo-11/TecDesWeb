@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Generador de CURP</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      padding: 20px;
+    }
+    form {
+      max-width: 500px;
+      margin: auto;
+      border: 1px solid #ccc;
+      padding: 20px;
+      border-radius: 8px;
+    }
+    input, select, button {
+      width: 100%;
+      padding: 8px;
+      margin: 8px 0;
+    }
+    #output {
+      margin-top: 20px;
+      text-align: center;
+      border: 1px solid #28a745;
+      padding: 10px;
+      border-radius: 6px;
+      background-color: #e6ffe6;
+    }
+  </style>
+</head>
+
+<body>
+
+  <h2>Obtenga su CURP</h2>
+
+  <form id="formCurp">
+    <input id="nombre" type="text" placeholder="Nombre(s)" required />
+    <input id="apellido1" type="text" placeholder="Primer Apellido" required />
+    <input id="apellido2" type="text" placeholder="Segundo Apellido" />
+
+    <label>Fecha de nacimiento:</label>
+    <select id="dia" required>
+      <option value="">Día</option>
+      <script>
+        for (let i = 1; i <= 31; i++) {
+          const d = String(i).padStart(2, "0");
+          document.write(`<option value="${d}">${d}</option>`);
+        }
+      </script>
+    </select>
+
+    <select id="mes" required>
+      <option value="">Mes</option>
+      <option value="01">Enero</option>
+      <option value="02">Febrero</option>
+      <option value="03">Marzo</option>
+      <option value="04">Abril</option>
+      <option value="05">Mayo</option>
+      <option value="06">Junio</option>
+      <option value="07">Julio</option>
+      <option value="08">Agosto</option>
+      <option value="09">Septiembre</option>
+      <option value="10">Octubre</option>
+      <option value="11">Noviembre</option>
+      <option value="12">Diciembre</option>
+    </select>
+
+    <input id="año" type="number" placeholder="Año (YYYY)" required />
+
+    <select id="sexo" required>
+      <option value="">Sexo</option>
+      <option value="H">Hombre</option>
+      <option value="M">Mujer</option>
+      <option value="X">No binario</option>
+    </select>
+
+    <select id="estado" required>
+      <option value="">Estado de nacimiento</option>
+      <option value="AS">Aguascalientes</option>
+      <option value="BC">Baja California</option>
+      <option value="BS">Baja California Sur</option>
+      <option value="CC">Campeche</option>
+      <option value="CS">Chiapas</option>
+      <option value="CH">Chihuahua</option>
+      <option value="CL">Coahuila</option>
+      <option value="CM">Colima</option>
+      <option value="DF">Ciudad de México</option>
+      <option value="DG">Durango</option>
+      <option value="GT">Guanajuato</option>
+      <option value="GR">Guerrero</option>
+      <option value="HG">Hidalgo</option>
+      <option value="JC">Jalisco</option>
+      <option value="MC">México</option>
+      <option value="MN">Michoacán</option>
+      <option value="MS">Morelos</option>
+      <option value="NT">Nayarit</option>
+      <option value="NL">Nuevo León</option>
+      <option value="OC">Oaxaca</option>
+      <option value="PL">Puebla</option>
+      <option value="QT">Querétaro</option>
+      <option value="QR">Quintana Roo</option>
+      <option value="SP">San Luis Potosí</option>
+      <option value="SL">Sinaloa</option>
+      <option value="SR">Sonora</option>
+      <option value="TC">Tabasco</option>
+      <option value="TS">Tamaulipas</option>
+      <option value="TL">Tlaxcala</option>
+      <option value="VZ">Veracruz</option>
+      <option value="YN">Yucatán</option>
+      <option value="ZS">Zacatecas</option>
+    </select>
+
+    <button type="button" id="btnCurp">Obtener CURP</button>
+  </form>
+
+  <div id="output" style="display: none;">
+    <p id="message"></p>
+  </div>
+
+  <script>
+    document.getElementById("btnCurp").addEventListener("click", function () {
+      const nombreCompleto = document.getElementById("nombre").value.trim().toUpperCase();
+      const apellido1 = document.getElementById("apellido1").value.trim().toUpperCase();
+      const apellido2 = document.getElementById("apellido2").value.trim().toUpperCase() || "X";
+      const dia = document.getElementById("dia").value;
+      const mes = document.getElementById("mes").value;
+      const añoFull = document.getElementById("año").value.trim();
+      const sexo = document.getElementById("sexo").value;
+      let estado = document.getElementById("estado").value;
+
+      if (!nombreCompleto || !apellido1 || !dia || !mes || !añoFull || !sexo || !estado) {
+        mostrarMensaje("Por favor complete todos los campos.");
+        return;
+      }
+
+      const año = añoFull.slice(-2);
+
+      if (estado === "DF" && parseInt(añoFull) >= 2016) {
+        estado = "CM";
+      }
+
+      let nombres = nombreCompleto.split(" ");
+      let nombre = nombres[0];
+      if (nombres.length > 1 && (quitarTildes(nombre) === "JOSE" || quitarTildes(nombre) === "MARIA")) {
+        nombre = quitarTildes(nombres[1]);
+      }
+
+      let curp = apellido1.charAt(0);
+      curp += apellido1.slice(1).match(/[AEIOU]/)?.[0] || "X";
+      curp += apellido2.charAt(0);
+      curp += nombre.charAt(0);
+      curp += año + mes + dia;
+      curp += sexo;
+      curp += estado;
+      curp += apellido1.slice(1).match(/[^AEIOU\s]/)?.[0] || "X";
+      curp += apellido2.slice(1).match(/[^AEIOU\s]/)?.[0] || "X";
+      curp += nombre.slice(1).match(/[^AEIOU\s]/)?.[0] || "X";
+      curp += "00";
+
+      mostrarMensaje(`Su CURP es: <strong>${curp}</strong>`);
+    });
+
+    function quitarTildes(texto) {
+      return texto.normalize("NFD").replace(/[\u0300-\u036f]/g, "");
+    }
+
+    function mostrarMensaje(msg) {
+      const output = document.getElementById("output");
+      const message = document.getElementById("message");
+      message.innerHTML = msg;
+      output.style.display = "block";
+    }
+  </script>
+
+</body>
+
+</html>

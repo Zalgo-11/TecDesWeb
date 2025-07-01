@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Múltiples operaciones</title>
+  <script>
+    function parOimpar(){
+      var x = parseFloat(document.getElementById("num1").value);
+      if (isNaN(x)) {
+        document.getElementById("parimpar").innerText = "Por favor, ingrese números válidos.";
+        return;
+      }
+      if((x % 2) == 0){
+        document.getElementById("parimpar").innerText = "El número es par";
+      } else {
+        document.getElementById("parimpar").innerText = "El número es impar";
+      }
+    }
+
+    function tablas(){
+      var x = parseFloat(document.getElementById("num2").value);
+      if (isNaN(x)) {
+        document.getElementById("tablas").innerText = "Por favor, ingrese un número válido.";
+        return;
+      }
+      var cadena = "" + x;
+      for(var i = 2; i <= 10; i++){
+        cadena += ", " + x * i;
+      }
+      document.getElementById("tablas").innerText = cadena;
+    }
+
+    function multiplicacion(){
+      var x = parseFloat(document.getElementById("num3").value);
+      var y = parseFloat(document.getElementById("num4").value);
+      if (isNaN(x) || isNaN(y)) {
+        document.getElementById("multiplicado").innerText = "Por favor, ingrese números válidos.";
+        return;
+      }
+      var resultado = 0;
+      for (var i = 0; i < y; i++) {
+        resultado += x;
+      }
+      document.getElementById("multiplicado").innerText = "La multiplicación te da " + resultado;
+    }
+
+    function agregarNumero(){
+      let contenedor = document.getElementById("numeros");
+      let input = document.createElement("input");
+      input.type = "number";
+      input.className = "numero";
+      contenedor.appendChild(input);
+      contenedor.appendChild(document.createElement("br"));
+    }
+
+    function encontrarMayor(){
+      let inputs = document.getElementsByClassName("numero");
+      let numeros = [];
+      for (let input of inputs) {
+        let val = parseFloat(input.value);
+        if (!isNaN(val)) numeros.push(val);
+      }
+      if (numeros.length === 0) {
+        document.getElementById("resultado").innerText = "Ingrese al menos un número válido.";
+        return;
+      }
+      let mayor = Math.max(...numeros);
+      let pos = numeros.indexOf(mayor) + 1;
+      document.getElementById("resultado").innerText = "El número mayor es: " + mayor + ", en la posición: " + pos;
+    }
+
+    function agregarDimension(){
+      let c1 = document.getElementById("vector1");
+      let c2 = document.getElementById("vector2");
+      let i1 = document.createElement("input");
+      i1.type = "number";
+      i1.className = "vector1-elemento";
+      c1.appendChild(i1);
+      c1.appendChild(document.createElement("br"));
+      let i2 = document.createElement("input");
+      i2.type = "number";
+      i2.className = "vector2-elemento";
+      c2.appendChild(i2);
+      c2.appendChild(document.createElement("br"));
+    }
+
+    function sumarVectores(){
+      let v1 = document.getElementsByClassName("vector1-elemento");
+      let v2 = document.getElementsByClassName("vector2-elemento");
+      if (v1.length !== v2.length || v1.length === 0) {
+        document.getElementById("vectorSumado").innerText = "Ambos vectores deben tener la misma cantidad de elementos y no estar vacíos.";
+        return;
+      }
+      let resultado = [];
+      for (let i = 0; i < v1.length; i++) {
+        let n1 = parseFloat(v1[i].value) || 0;
+        let n2 = parseFloat(v2[i].value) || 0;
+        resultado.push(n1 + n2);
+      }
+      document.getElementById("vectorSumado").innerText = "Resultado de la suma: [ " + resultado.join(", ") + " ]";
+    }
+
+    // NUEVOS CASOS
+    function calcularMedia(){
+      let inputs = document.getElementsByClassName("numero");
+      let numeros = [];
+      for (let input of inputs) {
+        let val = parseFloat(input.value);
+        if (!isNaN(val)) numeros.push(val);
+      }
+      if (numeros.length === 0) {
+        document.getElementById("media").innerText = "Ingrese al menos un número válido.";
+        return;
+      }
+      let suma = numeros.reduce((a,b) => a + b, 0);
+      let media = suma / numeros.length;
+      document.getElementById("media").innerText = "La media es: " + media;
+    }
+
+    function mostrarOrden(){
+      let inputs = document.getElementsByClassName("numero");
+      let numeros = [];
+      for (let input of inputs) {
+        let val = parseFloat(input.value);
+        if (!isNaN(val)) numeros.push(val);
+      }
+      if (numeros.length === 0) {
+        document.getElementById("ordenados").innerText = "Ingrese al menos un número válido.";
+        return;
+      }
+      numeros.sort((a,b) => a - b);
+      document.getElementById("ordenados").innerText = "Ordenados: [ " + numeros.join(", ") + " ]";
+    }
+
+    function agregarTexto(){
+      let cont = document.getElementById("textos");
+      let input = document.createElement("input");
+      input.type = "text";
+      input.className = "texto";
+      cont.appendChild(input);
+      cont.appendChild(document.createElement("br"));
+    }
+
+    function procesarTextos(){
+      let inputs = document.getElementsByClassName("texto");
+      let resultado = "";
+      for (let input of inputs) {
+        let txt = input.value.trim();
+        if (txt.length > 0) {
+          resultado += `Texto: "${txt}" | Longitud: ${txt.length} | MAY: ${txt.toUpperCase()} | min: ${txt.toLowerCase()} \n`;
+        }
+      }
+      if (resultado === "") {
+        document.getElementById("infoTextos").innerText = "Ingrese al menos un texto.";
+      } else {
+        document.getElementById("infoTextos").innerText = resultado;
+      }
+    }
+  </script>
+</head>
+<body>
+  <h3>Leer un Número y mostrar si es par o no</h3>
+  <input type="number" id="num1">
+  <button onclick="parOimpar()">Buscar pariedad</button>
+  <p id="parimpar"></p>
+
+  <h3>Leer un Número y mostrar su tabla de multiplicar</h3>
+  <input type="number" id="num2">
+  <button onclick="tablas()">Multiplicar</button>
+  <p id="tablas"></p>
+
+  <h3>Leer dos Números y mostrar multiplicación</h3>
+  <input type="number" id="num3"> <input type="number" id="num4">
+  <button onclick="multiplicacion()">Multiplicar</button>
+  <p id="multiplicado"></p>
+
+  <h2>Operaciones con varios números</h2>
+  <div id="numeros"></div>
+  <button onclick="agregarNumero()">Agregar Número</button>
+  <button onclick="encontrarMayor()">Encontrar Mayor</button>
+  <button onclick="calcularMedia()">Calcular Media</button>
+  <button onclick="mostrarOrden()">Mostrar Ordenados</button>
+  <p id="resultado"></p>
+  <p id="media"></p>
+  <p id="ordenados"></p>
+
+  <h2>Suma de vectores</h2>
+  <div id="vector1"></div>
+  <div id="vector2"></div>
+  <button onclick="agregarDimension()">Agregar Número</button>
+  <button onclick="sumarVectores()">Sumar Vectores</button>
+  <p id="vectorSumado"></p>
+
+  <h2>Procesar secuencia de textos</h2>
+  <div id="textos"></div>
+  <button onclick="agregarTexto()">Agregar Texto</button>
+  <button onclick="procesarTextos()">Procesar Textos</button>
+  <pre id="infoTextos"></pre>
+</body>
+</html>

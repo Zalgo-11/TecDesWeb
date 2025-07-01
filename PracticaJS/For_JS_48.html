@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Operaciones For</title>
+</head>
+<body>
+    <script type="text/javascript">
+        var i=0;
+        var j=0;
+        document.write('Numeros pares entre 1 y 100');
+        document.write('<p>');
+        for(i=0;i<100;i++){
+            j=j+i;
+            if((i%2)==0){
+                document.write(' ' + i +', ');
+            }
+        }
+        document.write('</p>');
+        
+        document.write('La suma de los primeros 100 numeros es: ');
+        document.write('<h1>' +j+'</h1>');
+    </script>
+</body>
+</html>
